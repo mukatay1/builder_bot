@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JBM Stroy</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Хранилище фоток</h1>
+    {% for folder in folders %}
+        {% if folder.files %}
+            <h2>Квартира: {{ folder.name }}</h2>
+            <div class="row">
+                <div class="gallery">
+                    {% for file in folder.files %}
+                        {% if file.type == 'image' %}
+                            <img src="/media/{{ folder.name }}/{{ file.name }}" alt="{{ file.name }}" >
+                        {% elif file.type == 'video' %}
+                            <video controls>
+                                <source src="/media/{{ folder.name }}/{{ file.name }}" type="video/mp4">
+                                Ваш браузер не поддерживает просмотр видео.
+                            </video>
+                        {% else %}
+                            <p>Файл {{ file.name }} имеет неизвестный формат.</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <h2>Квартира: {{ folder.name }}</h2>
+            <p>Нет доступных изображений или видео.</p>
+        {% endif %}
+    {% endfor %}
+
+</body>
+</html>
