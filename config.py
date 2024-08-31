@@ -39,3 +39,5 @@ black_border = Border(
     top=Side(border_style='thin', color='000000'),
     bottom=Side(border_style='thin', color='000000')
 )
+
+NUMBERS = [1, 2, 3, 4, 5]

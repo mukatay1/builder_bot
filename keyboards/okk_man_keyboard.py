@@ -5,7 +5,7 @@ def okk_man_keyboard() -> ReplyKeyboardMarkup:
     kb = [
         [KeyboardButton(text="Доступные квартиры: 1 этап")],
         [KeyboardButton(text="Доступные квартиры: 2 этап")],
-        [KeyboardButton(text="Подписать АВР")]
+        [KeyboardButton(text="Чистота производства")]
     ]
     keyboard = ReplyKeyboardMarkup(
         keyboard=kb,

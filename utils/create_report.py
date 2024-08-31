@@ -26,14 +26,15 @@ def generate_apartment_stage_report(report_filename: str):
 
         data.append({
             "Номер квартиры": apartment.number,
+            "Статус": f"{status}\r\n{status_date}",
             "Дата начало работ": apartment.start_date,
             "Первый этап готов": 'Принят' if (first_stage and first_stage.is_finished) else 'Нет',
             "Причина отказа от 1 этапа": first_stage.comment,
             "Второй этап готов": 'Принят' if (second_stage and second_stage.is_finished) else 'Нет',
             "Причина отказа от 2 этапа": second_stage.comment,
             "Дата завершения работ": apartment.end_date,
-            "Статус": f"{status}\r\n{status_date}",
             "Дедлайн": days_until_deadline(),
+            "Чистота производства": apartment.clear_level,
             "АВР": 'Подписан' if apartment.is_accepted else 'Не подписан'
         })
 
@@ -46,14 +47,14 @@ def generate_apartment_stage_report(report_filename: str):
     ws.title = "Отчет по этапам"
 
     ws.insert_rows(1)
-    ws.merge_cells('A1:J1')
+    ws.merge_cells('A1:K1')
     ws['A1'] = 'Отчет по готовности этапов квартир'
     ws['A1'].font = Font(size=16, bold=True)
     ws['A1'].alignment = Alignment(horizontal='center')
 
     deadline = datetime.strptime(DEADLINE, '%Y-%m-%d')
 
-    for row in ws.iter_rows(min_col=7, max_col=7):
+    for row in ws.iter_rows(min_col=8, max_col=8):
         for cell in row:
             if cell.value is None:
                 cell_date = datetime.today()
@@ -69,7 +70,7 @@ def generate_apartment_stage_report(report_filename: str):
                 cell.fill = red_fill
                 cell.border = black_border
 
-    for row in ws.iter_rows(min_col=8, max_col=8):
+    for row in ws.iter_rows(min_col=2, max_col=2):
         for cell in row:
             cell.alignment = Alignment(wrap_text=True, horizontal='center', vertical='center')
 

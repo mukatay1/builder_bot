@@ -102,8 +102,10 @@ async def handle_accept(callback_query: types.CallbackQuery, state: FSMContext):
 
         if apartment:
             stage = session.query(ApartmentStage).filter_by(apartment_id=apartment.id, stage=stage_enum_value).first()
-            apartment.end_date = get_current_time()
-            session.commit()
+
+            if stage.stage == StageEnum.SECOND:
+                apartment.end_date = get_current_time()
+                session.commit()
 
             if stage:
                 stage.is_finished = True

@@ -15,3 +15,4 @@ class Apartment(Base):
     start_date = Column(Date, nullable=True)
     end_date = Column(Date, nullable=True)
     is_accepted = Column(Boolean, default=False)
+    clear_level = Column(String, nullable=True)

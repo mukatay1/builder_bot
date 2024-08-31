@@ -62,7 +62,7 @@ async def handle_supervisor_status(callback_query: CallbackQuery, state: FSMCont
         if status_index >= len(STATUS):
             await callback_query.message.answer("Пожалуйста, выберите статус.")
             return
-
+        print(status_index)
         status = STATUS[status_index]
         apartment.status = status
         apartment.status_date = get_current_time()

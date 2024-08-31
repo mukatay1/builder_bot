@@ -84,7 +84,6 @@ async def handle_apartment_number_for_second_stage(message: types.Message, state
     if error_message:
         await message.answer(error_message)
         await state.clear()
-
         return
 
     apartment = session.query(Apartment).filter_by(number=user_apartment_number).first()
