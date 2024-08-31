@@ -5,7 +5,7 @@ from openpyxl import load_workbook
 from openpyxl.styles import Font, Alignment
 from openpyxl.cell import MergedCell
 
-from config import green_fill, red_fill, DEADLINE, black_border
+from config import green_fill, red_fill, DEADLINE, black_border, yellow_fill
 from database.main import SessionLocal
 from database.models.Apartment import Apartment
 from database.models.ApartmentStage import StageEnum
@@ -73,6 +73,8 @@ def generate_apartment_stage_report(report_filename: str):
     for row in ws.iter_rows(min_col=2, max_col=2):
         for cell in row:
             cell.alignment = Alignment(wrap_text=True, horizontal='center', vertical='center')
+            cell.fill = yellow_fill
+            cell.border = black_border
 
 
     for column in ws.columns:
