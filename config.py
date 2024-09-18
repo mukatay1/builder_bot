@@ -18,7 +18,7 @@ DEADLINE = "2024-11-15"
 
 STATUS = [
     'Черновая электрика и черновая сантехника',
-    'Стены (выравнивание стен)',
+    'Стены',
     'Подоконник/откосы',
     'Укладка с\у и балкона',
     'Наливной пол',
@@ -43,3 +43,6 @@ black_border = Border(
 )
 
 NUMBERS = [1, 2, 3, 4, 5]
+
+lst = FOREMAN + OKK_MAN + REPORT_MAN + ADMIN
+USERS = [user_id for user_id in lst if user_id]

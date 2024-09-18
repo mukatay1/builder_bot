@@ -12,6 +12,7 @@ from dotenv import load_dotenv
 from config import DEBUG
 from database.main import init_db
 from utils.register_routers_from_package import register_routers_from_package
+from utils.schedule import schedule_jobs
 
 load_dotenv()
 
@@ -29,6 +30,7 @@ async def main() -> None:
 
     register_routers_from_package('handlers', dp)
     init_db()
+    schedule_jobs(bot)
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
