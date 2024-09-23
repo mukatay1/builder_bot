@@ -10,6 +10,7 @@ class Apartment(Base):
     id = Column(Integer, primary_key=True)
     number = Column(String, unique=True, nullable=False)
     status = Column(String, nullable=True)
+    status_id = Column(Integer, default=0)
     stages = relationship('ApartmentStage', back_populates='apartment')
     status_date = Column(Date, nullable=True)
     start_date = Column(Date, nullable=True)

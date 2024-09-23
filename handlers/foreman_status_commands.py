@@ -62,9 +62,9 @@ async def handle_supervisor_status(callback_query: CallbackQuery, state: FSMCont
         if status_index >= len(STATUS):
             await callback_query.message.answer("Пожалуйста, выберите статус.")
             return
-        print(status_index)
         status = STATUS[status_index]
         apartment.status = status
+        apartment.status_id = status_index + 1
         apartment.status_date = get_current_time()
 
         await callback_query.message.answer(
@@ -80,7 +80,6 @@ async def handle_supervisor_status(callback_query: CallbackQuery, state: FSMCont
 
         session.close()
         await state.clear()
-
     except Exception as e:
         print(f"Error in handle_supervisor: {e}")
         await callback_query.message.answer("Произошла ошибка при обработке вашего выбора.")

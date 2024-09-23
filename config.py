@@ -31,6 +31,8 @@ STATUS = [
     'Клининг'
 ]
 
+MAX_STATUS_NUMBER = 12
+
 red_fill = PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
 green_fill = PatternFill(start_color='00FF00', end_color='00FF00', fill_type='solid')
 yellow_fill = PatternFill(start_color='FFFF00', end_color='FFFF00', fill_type='solid')
@@ -43,6 +45,5 @@ black_border = Border(
 )
 
 NUMBERS = [1, 2, 3, 4, 5]
-
 lst = FOREMAN + OKK_MAN + REPORT_MAN + ADMIN
 USERS = [user_id for user_id in lst if user_id]

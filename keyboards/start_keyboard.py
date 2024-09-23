@@ -11,7 +11,9 @@ def start_keyboard() -> ReplyKeyboardMarkup:
     keyboard = ReplyKeyboardMarkup(
         keyboard=kb,
         resize_keyboard=True,
-        input_field_placeholder="Нажмите на кнопку"
+        input_field_placeholder="Нажмите на кнопку",
+        one_time_keyboard=False
+
     )
     return keyboard
 
