@@ -9,6 +9,8 @@ def foreman_keyboard() -> ReplyKeyboardMarkup:
     keyboard = ReplyKeyboardMarkup(
         keyboard=kb,
         resize_keyboard=True,
-        input_field_placeholder="Выберите действие"
+        input_field_placeholder="Выберите действие",
+        one_time_keyboard=False
+
     )
     return keyboard

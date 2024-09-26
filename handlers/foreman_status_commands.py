@@ -1,3 +1,6 @@
+import json
+from datetime import datetime
+
 from aiogram import Router, types
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
@@ -7,6 +10,7 @@ from config import STATUS
 from database.main import SessionLocal
 from database.models.Apartment import Apartment
 from keyboards.status_keyboard import get_second_status_keyboard
+from utils.calculate_percentage import calculate_completion_percentage
 from utils.get_current_time import get_current_time
 from utils.validate_apartment_number import validate_apartment_number
 
@@ -54,7 +58,7 @@ async def handle_supervisor_status(callback_query: CallbackQuery, state: FSMCont
     number = data.get("number")
 
     apartment = session.query(Apartment).filter_by(number=number).first()
-
+    apartments = session.query(Apartment).all()
 
     try:
         status_index = int(callback_query.data.split('_', 1)[1])
@@ -77,6 +81,29 @@ async def handle_supervisor_status(callback_query: CallbackQuery, state: FSMCont
         if not apartment.start_date:
             apartment.start_date = get_current_time()
             session.commit()
+
+
+        completion_percentage = calculate_completion_percentage(apartments)
+        current_percentage = completion_percentage.get(status, 0)
+
+        if completion_percentage.get(status, 0) >= 100:
+            completion_data = {
+                "status_id": status_index,
+                "completion_date": datetime.now().strftime("%Y-%m-%d")
+            }
+            try:
+                with open('completion_data.json', 'r') as f:
+                    existing_data = json.load(f)
+            except Exception as e:
+                print(e)
+                existing_data = []
+
+            existing_data.append(completion_data)
+
+            with open('completion_data.json', 'w') as f:
+                json.dump(existing_data, f, indent=4)
+
+            await callback_query.message.answer(f"Статус {status} достиг 100% выполнения. Все завершено.")
 
         session.close()
         await state.clear()

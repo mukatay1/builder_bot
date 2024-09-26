@@ -10,7 +10,6 @@ from database.main import SessionLocal
 from database.models.Apartment import Apartment
 from database.models.ApartmentStage import StageEnum
 from utils.days_until_deadline import days_until_deadline
-from utils.format_deadline import format_deadline_date
 
 
 def generate_apartment_stage_report(report_filename: str):

@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 from dotenv import load_dotenv
 from openpyxl.styles import PatternFill, Border, Side
@@ -31,11 +32,14 @@ STATUS = [
     'Клининг'
 ]
 
-MAX_STATUS_NUMBER = 12
+MAX_STATUS_NUMBER = len(STATUS)
 
-red_fill = PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
-green_fill = PatternFill(start_color='00FF00', end_color='00FF00', fill_type='solid')
-yellow_fill = PatternFill(start_color='FFFF00', end_color='FFFF00', fill_type='solid')
+red_fill = PatternFill(start_color='f2aca2', end_color='f2aca2', fill_type='solid')
+green_fill = PatternFill(start_color='b1d492', end_color='b1d492', fill_type='solid')
+yellow_fill = PatternFill(start_color='f7f3ac', end_color='f7f3ac', fill_type='solid')
+blue_fill = PatternFill(start_color='b3c6e7', end_color='b3c6e7', fill_type='solid')
+gray_fill = PatternFill(start_color='a4a6a3', end_color='a4a6a3', fill_type='solid')
+
 
 black_border = Border(
     left=Side(border_style='thin', color='000000'),
@@ -47,3 +51,17 @@ black_border = Border(
 NUMBERS = [1, 2, 3, 4, 5]
 lst = FOREMAN + OKK_MAN + REPORT_MAN + ADMIN
 USERS = [user_id for user_id in lst if user_id]
+
+plan_dates = [
+    datetime(2024, 9, 15), datetime(2024, 10, 1), datetime(2024, 10, 1),
+    datetime(2024, 10, 2), datetime(2024, 11, 15), datetime(2024, 11, 15),
+    datetime(2024, 11, 15), datetime(2024, 11, 10), datetime(2024, 11, 10),
+    datetime(2024, 10, 1), datetime(2024, 11, 1), datetime(2024, 12, 1)
+]
+
+start_dates = [
+    datetime(2024, 8, 5), datetime(2024, 8, 18), datetime(2024, 8, 18),
+    datetime(2024, 8, 19), datetime(2024, 10, 15), datetime(2024, 10, 15),
+    datetime(2024, 10, 15), datetime(2024, 10, 20), datetime(2024, 10, 20),
+    datetime(2024, 10, 15), datetime(2024, 10, 20), datetime(2024, 10, 20)
+]
